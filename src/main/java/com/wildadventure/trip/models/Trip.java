@@ -3,7 +3,14 @@ package com.wildadventure.trip.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+//@Entity
 public class Trip {
+	//@Id
+	//@GeneratedValue
 	private Long id;
 	private String label;
 	private String description;
