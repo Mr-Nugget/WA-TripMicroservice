@@ -15,7 +15,7 @@ public class TripController {
 	@GetMapping(value = "Trip/{id}")
 	public Trip getTripById(@PathVariable int id) {
 		log.info("Id du trip :" + id);
-		Trip myTrip = new Trip(new Long(0), "La diagonale du fou", "blablabla", new Float(500.00), 10, 5, "/assets/img/monimage.png", null, null, null);
+		Trip myTrip = new Trip(new Long(0), "La diagonale du fou", "blablabla", "France", "/assets/img/monimage.png", null, null, null);
 		
 		return myTrip;
 	}

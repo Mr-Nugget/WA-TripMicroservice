@@ -7,10 +7,12 @@ import java.util.Optional;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -18,7 +20,9 @@ import com.wildadventure.trip.dao.ICategoryDao;
 import com.wildadventure.trip.exceptions.CategoryNotFoundException;
 import com.wildadventure.trip.models.Category;
 
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
+@RequestMapping("/Category")
 public class CategoryController {
 
 	private static Logger log = Logger.getLogger(CategoryController.class);
@@ -31,10 +35,9 @@ public class CategoryController {
 	 * Get all categories in database
 	 * @return a list of all trip categories
 	 */
-	@GetMapping(value = "Category/all")
+	@GetMapping(value = "/all")
 	public List<Category> findAllCategories(){
 		List<Category> allCategories = categoryDao.findAll();
-		
 		return allCategories;
 	}
 	
@@ -44,7 +47,7 @@ public class CategoryController {
 	 * @return error : 404, success : 200 with Category object
 	 * @throws CategoryNotFoundException 
 	 */
-	@GetMapping(value="Category/{id}")
+	@GetMapping(value="/{id}")
 	public ResponseEntity<Category> findCategoryById(@PathVariable int id) throws CategoryNotFoundException {
 		Long longId = new Long(id);
 		
@@ -63,7 +66,7 @@ public class CategoryController {
 	 * @param category
 	 * @return responseEntity with status code for clients : error = 404, success = 201
 	 */
-	@PostMapping(value = "Category/add")
+	@PostMapping(value = "/add")
 	public ResponseEntity<Void> addCategory(@RequestBody Category category) {
 		log.info(category);
 		Category categoryAdded = categoryDao.save(category);

@@ -3,25 +3,42 @@ package com.wildadventure.trip.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-//@Entity
+@Entity
 public class Trip {
-	//@Id
-	//@GeneratedValue
+	@Id
+	@GeneratedValue
+	@Column(name="TRIP_ID")
 	private Long id;
+	
+	@Column(name="LABEL")
 	private String label;
+	
+	@Column(name="DESCRIPTION")
 	private String description;
-	private Float price;
-	private Integer maxPerson;
-	private Integer currentPerson;
+	
+	@Column(name="DESTINATION")
+	private String destination;
+	
+	@Column(name="IMAGE_PATH")
 	private String imagePath;
 	
+	@ManyToOne
+	@JoinColumn(name="CATEGORY_ID")
 	private Category category;
+	
+	@OneToMany(mappedBy="trip")
 	private List<Comment> comments;
-	private TripDates dates;
+	
+	@OneToMany(mappedBy="trip")
+	private List<TripInstance> instances;
 	
 	/**
 	 * Empty Constructor
@@ -30,32 +47,28 @@ public class Trip {
 		id = null;
 		label = "";
 		description = "";
-		price = new Float(0.00);
-		maxPerson = 0;
-		currentPerson = 0;
 		imagePath = "";
-		
+		destination = "";
 		category = new Category();
 		comments = new ArrayList<>();
-		dates = new TripDates();		
+		instances = new ArrayList<>();		
 	}
 	
-	
 
-	public Trip(Long id, String label, String description, Float price, Integer maxPerson, Integer currentPerson,
-			String imagePath, Category category, List<Comment> comments, TripDates dates) {
+	public Trip(Long id, String label, String description, String destination, String imagePath, Category category,
+			List<Comment> comments, List<TripInstance> instances) {
 		super();
 		this.id = id;
 		this.label = label;
 		this.description = description;
-		this.price = price;
-		this.maxPerson = maxPerson;
-		this.currentPerson = currentPerson;
+		this.destination = destination;
 		this.imagePath = imagePath;
 		this.category = category;
 		this.comments = comments;
-		this.dates = dates;
+		this.instances = instances;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -79,30 +92,6 @@ public class Trip {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Float getPrice() {
-		return price;
-	}
-
-	public void setPrice(Float price) {
-		this.price = price;
-	}
-
-	public Integer getMaxPerson() {
-		return maxPerson;
-	}
-
-	public void setMaxPerson(Integer maxPerson) {
-		this.maxPerson = maxPerson;
-	}
-
-	public Integer getCurrentPerson() {
-		return currentPerson;
-	}
-
-	public void setCurrentPerson(Integer currentPerson) {
-		this.currentPerson = currentPerson;
 	}
 
 	public String getImagePath() {
@@ -129,11 +118,32 @@ public class Trip {
 		this.comments = comments;
 	}
 
-	public TripDates getDates() {
-		return dates;
+
+	public String getDestination() {
+		return destination;
 	}
 
-	public void setDates(TripDates dates) {
-		this.dates = dates;
+
+	public void setDestination(String destination) {
+		this.destination = destination;
 	}
+
+
+	public List<TripInstance> getInstances() {
+		return instances;
+	}
+
+
+	public void setInstances(List<TripInstance> instances) {
+		this.instances = instances;
+	}
+
+	@Override
+	public String toString() {
+		return "Trip [id=" + id + ", label=" + label + ", description=" + description + ", destination=" + destination
+				+ ", imagePath=" + imagePath + ", category=" + category + ", comments=" + comments + ", instances="
+				+ instances + "]";
+	}
+	
+
 }

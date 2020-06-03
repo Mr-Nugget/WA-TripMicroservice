@@ -1,5 +1,6 @@
 package com.wildadventure.trip.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,8 +17,11 @@ public class Category {
 	
 	@Id
 	@GeneratedValue
+	@Column(name="CATEGORY_ID")
 	private Long id;
+	
 	@Length(min=3, max=20, message="Label length must be between 3 and 20")
+	@Column(name="LABEL")
 	private String label;
 	
 	public Category() {
