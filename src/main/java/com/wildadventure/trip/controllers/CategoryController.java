@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.wildadventure.trip.dao.ICategoryDao;
 import com.wildadventure.trip.exceptions.CategoryNotFoundException;
 import com.wildadventure.trip.models.Category;
+import com.wildadventure.trip.services.ICategoryService;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
@@ -28,7 +28,7 @@ public class CategoryController {
 	private static Logger log = Logger.getLogger(CategoryController.class);
 	
 	@Autowired
-	private ICategoryDao categoryDao;
+	private ICategoryService categoryService;
 	
 	
 	/**
@@ -37,7 +37,7 @@ public class CategoryController {
 	 */
 	@GetMapping(value = "/all")
 	public List<Category> findAllCategories(){
-		List<Category> allCategories = categoryDao.findAll();
+		List<Category> allCategories = categoryService.getAll();
 		return allCategories;
 	}
 	
@@ -51,9 +51,10 @@ public class CategoryController {
 	public ResponseEntity<Category> findCategoryById(@PathVariable int id) throws CategoryNotFoundException {
 		Long longId = new Long(id);
 		
-		Optional<Category> option = categoryDao.findById(longId);
+		Optional<Category> option = categoryService.getById(longId);
 		
 		if(option.isPresent()) {
+			log.info("Find trip with id : " + id);
 			return ResponseEntity.ok(option.get());
 		}else {
 			throw new CategoryNotFoundException("Cannot find category with id : " + id);
@@ -68,8 +69,7 @@ public class CategoryController {
 	 */
 	@PostMapping(value = "/add")
 	public ResponseEntity<Void> addCategory(@RequestBody Category category) {
-		log.info(category);
-		Category categoryAdded = categoryDao.save(category);
+		Category categoryAdded = categoryService.add(category);
 		
 		if(categoryAdded == null) {
 			return ResponseEntity.noContent().build();
@@ -82,6 +82,5 @@ public class CategoryController {
 						.toUri();
 		
 		return ResponseEntity.created(location).build();
-		
 	}
 }
