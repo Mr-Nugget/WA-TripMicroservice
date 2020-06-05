@@ -21,7 +21,7 @@ public class Trip {
 	@Column(name="LABEL")
 	private String label;
 	
-	@Column(name="DESCRIPTION")
+	@Column(name="DESCRIPTION", columnDefinition="TEXT")
 	private String description;
 	
 	@Column(name="DESTINATION")

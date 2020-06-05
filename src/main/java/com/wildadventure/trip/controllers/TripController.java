@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.wildadventure.trip.exceptions.TripNotFoundException;
+import com.wildadventure.trip.models.Category;
 import com.wildadventure.trip.models.Trip;
 import com.wildadventure.trip.services.ITripService;
 
@@ -30,12 +31,22 @@ public class TripController {
 	
 	private static Logger log = Logger.getLogger(TripController.class);
 	
+	/**
+	 * Get all Trip of the DB
+	 * @return
+	 */
 	@GetMapping(value ="/all")
 	public List<Trip> getAllTrip(){
 		return tripService.getAll();
 	}
 	
-	@GetMapping(value = "/{id}")
+	/**
+	 * Get a Trip object by it's ID
+	 * @param id
+	 * @return JSON response with status code
+	 * @throws TripNotFoundException
+	 */
+	@GetMapping(value = "/byId/{id}")
 	public ResponseEntity<Trip> getTripById(@PathVariable int id) throws TripNotFoundException {
 		Long longId = new Long(id);
 		
@@ -49,6 +60,31 @@ public class TripController {
 		}
 	}
 	
+	/**
+	 * Get a list of trip associated to the category with the ID in parameters
+	 * @param categoryId
+	 * @return a list of trip
+	 * @throws TripNotFoundException
+	 */
+	@GetMapping(value="/byCategory/{categoryId}")
+	public ResponseEntity<List<Trip>> getTripByCategory(@PathVariable int categoryId) throws TripNotFoundException{
+		Long longId = new Long(categoryId);
+		Category category = new Category(longId, "");
+		log.info(category);
+		List<Trip> result = tripService.getByCategory(category);
+		
+		if(result != null) {
+			return ResponseEntity.ok(result);
+		}else {
+			throw new TripNotFoundException("Cannot find trip with category id : " + categoryId);
+		}
+	}
+	
+	/**
+	 * Add a new trip into the DB
+	 * @param newTrip
+	 * @return the URI of the new object and a status code (success 201 or fail 404)
+	 */
 	@PostMapping(value= "/add")
 	public ResponseEntity<Void> addTrip(@RequestBody Trip newTrip){
 		Trip tripAdded = tripService.add(newTrip);
