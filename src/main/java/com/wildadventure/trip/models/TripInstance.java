@@ -9,6 +9,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+/**
+ * Bean object representing instances of a trip by a ManyToOne binding.
+ * Describe begin and end date to a trip with the current person registered.
+ * @author Titouan
+ *
+ */
+
+@JsonIgnoreProperties(value = {"trip"})
 @Entity
 public class TripInstance {
 
@@ -23,9 +33,6 @@ public class TripInstance {
 	@Column(name="END_DATE")
 	private Date endDate;
 	
-	@Column(name="MAX_PERSON")
-	private Integer maxPerson;
-	
 	@Column(name="CURRENT_PERSON")
 	private Integer currentPerson;
 	
@@ -33,13 +40,15 @@ public class TripInstance {
 	@JoinColumn(name="TRIP_ID")
 	private Trip trip;
 	
+	public TripInstance() {
+		
+	}
 
-	public TripInstance(Long id, Date beginDate, Date endDate, Integer maxPerson, Integer currentPerson, Trip trip) {
+	public TripInstance(Long id, Date beginDate, Date endDate, Integer currentPerson, Trip trip) {
 		super();
 		this.id = id;
 		this.beginDate = beginDate;
 		this.endDate = endDate;
-		this.maxPerson = maxPerson;
 		this.currentPerson = currentPerson;
 		this.trip = trip;
 	}
@@ -51,8 +60,6 @@ public class TripInstance {
 	public void setTrip(Trip trip) {
 		this.trip = trip;
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -78,14 +85,6 @@ public class TripInstance {
 		this.endDate = endDate;
 	}
 
-	public Integer getMaxPerson() {
-		return maxPerson;
-	}
-
-	public void setMaxPerson(Integer maxPerson) {
-		this.maxPerson = maxPerson;
-	}
-
 	public Integer getCurrentPerson() {
 		return currentPerson;
 	}
@@ -96,8 +95,7 @@ public class TripInstance {
 
 	@Override
 	public String toString() {
-		return "TripInstance [id=" + id + ", beginDate=" + beginDate + ", endDate=" + endDate + ", maxPerson="
-				+ maxPerson + ", currentPerson=" + currentPerson + ", trip=" + trip + "]";
+		return "TripInstance [id=" + id + ", beginDate=" + beginDate + ", endDate=" + endDate + ", currentPerson=" + currentPerson + ", trip=" + trip + "]";
 	}
 	
 }

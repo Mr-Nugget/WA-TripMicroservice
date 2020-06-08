@@ -27,6 +27,9 @@ public class Trip {
 	@Column(name="DESTINATION")
 	private String destination;
 	
+	@Column(name="MAX_PERSON")
+	private Integer maxPerson;
+	
 	@Column(name="IMAGE_PATH")
 	private String imagePath;
 	
@@ -37,8 +40,6 @@ public class Trip {
 	@OneToMany(mappedBy="trip")
 	private List<Comment> comments;
 	
-	@OneToMany(mappedBy="trip")
-	private List<TripInstance> instances;
 	
 	/**
 	 * Empty Constructor
@@ -50,13 +51,12 @@ public class Trip {
 		imagePath = "";
 		destination = "";
 		category = new Category();
-		comments = new ArrayList<>();
-		instances = new ArrayList<>();		
+		comments = new ArrayList<>();		
 	}
 	
 
 	public Trip(Long id, String label, String description, String destination, String imagePath, Category category,
-			List<Comment> comments, List<TripInstance> instances) {
+			List<Comment> comments) {
 		super();
 		this.id = id;
 		this.label = label;
@@ -65,7 +65,6 @@ public class Trip {
 		this.imagePath = imagePath;
 		this.category = category;
 		this.comments = comments;
-		this.instances = instances;
 	}
 
 
@@ -101,6 +100,15 @@ public class Trip {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
+	
+	public Integer getMaxPerson() {
+		return maxPerson;
+	}
+
+	public void setMaxPerson(Integer maxPerson) {
+		this.maxPerson = maxPerson;
+	}
+
 
 	public Category getCategory() {
 		return category;
@@ -129,21 +137,11 @@ public class Trip {
 	}
 
 
-	public List<TripInstance> getInstances() {
-		return instances;
-	}
-
-
-	public void setInstances(List<TripInstance> instances) {
-		this.instances = instances;
-	}
-
 	@Override
 	public String toString() {
 		return "Trip [id=" + id + ", label=" + label + ", description=" + description + ", destination=" + destination
-				+ ", imagePath=" + imagePath + ", category=" + category + ", comments=" + comments + ", instances="
-				+ instances + "]";
-	}
-	
+				+ ", maxPerson=" + maxPerson + ", imagePath=" + imagePath + ", category=" + category + ", comments="
+				+ comments + "]";
+	}	
 
 }

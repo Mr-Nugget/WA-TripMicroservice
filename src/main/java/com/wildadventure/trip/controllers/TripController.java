@@ -70,7 +70,6 @@ public class TripController {
 	public ResponseEntity<List<Trip>> getTripByCategory(@PathVariable int categoryId) throws TripNotFoundException{
 		Long longId = new Long(categoryId);
 		Category category = new Category(longId, "");
-		log.info(category);
 		List<Trip> result = tripService.getByCategory(category);
 		
 		if(result != null) {
