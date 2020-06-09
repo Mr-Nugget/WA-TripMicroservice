@@ -41,6 +41,7 @@ public class Trip {
 	private List<Comment> comments;
 	
 	
+	
 	/**
 	 * Empty Constructor
 	 */
@@ -141,7 +142,7 @@ public class Trip {
 	public String toString() {
 		return "Trip [id=" + id + ", label=" + label + ", description=" + description + ", destination=" + destination
 				+ ", maxPerson=" + maxPerson + ", imagePath=" + imagePath + ", category=" + category + ", comments="
-				+ comments + "]";
+				+ comments + " ]";
 	}	
 
 }
