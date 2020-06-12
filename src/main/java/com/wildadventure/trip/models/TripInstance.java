@@ -36,6 +36,9 @@ public class TripInstance {
 	@Column(name="CURRENT_PERSON")
 	private Integer currentPerson;
 	
+	@Column(name="PRICE")
+	private Float price;
+	
 	@ManyToOne
 	@JoinColumn(name="TRIP_ID")
 	private Trip trip;
@@ -44,12 +47,14 @@ public class TripInstance {
 		
 	}
 
-	public TripInstance(Long id, Date beginDate, Date endDate, Integer currentPerson, Trip trip) {
+
+	public TripInstance(Long id, Date beginDate, Date endDate, Integer currentPerson, Float price, Trip trip) {
 		super();
 		this.id = id;
 		this.beginDate = beginDate;
 		this.endDate = endDate;
 		this.currentPerson = currentPerson;
+		this.price = price;
 		this.trip = trip;
 	}
 
@@ -92,6 +97,15 @@ public class TripInstance {
 	public void setCurrentPerson(Integer currentPerson) {
 		this.currentPerson = currentPerson;
 	}
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
+	}
+
 
 	@Override
 	public String toString() {
