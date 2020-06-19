@@ -1,6 +1,7 @@
 package com.wildadventure.trip.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,22 @@ public class TripInstanceController {
 			return ResponseEntity.ok(result);			
 		}else {
 			throw new TripInstanceNotFoundException("Cannot find tripInstance with trip id : " + tripId);
+		}
+	}
+	
+	/**
+	 * Get a trip instance by its id
+	 * @param instanceId
+	 * @return
+	 * @throws TripInstanceNotFoundException
+	 */
+	@GetMapping(value="/byId/{instanceId}")
+	public ResponseEntity<TripInstance> getTripInstanceById(@PathVariable int instanceId) throws TripInstanceNotFoundException{
+		Optional<TripInstance> option = tripInstanceService.getById(new Long(instanceId));
+		if(option.isPresent()) {
+			return ResponseEntity.ok(option.get());
+		}else {
+			throw new TripInstanceNotFoundException("Cannot find trip instance with id " + instanceId);
 		}
 	}
 }

@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Bean object representing instances of a trip by a ManyToOne binding.
@@ -18,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  */
 
-@JsonIgnoreProperties(value = {"trip"})
 @Entity
 public class TripInstance {
 
