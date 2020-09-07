@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 
 /**
@@ -31,7 +32,7 @@ public class TripInstance {
 	@Column(name="END_DATE")
 	private Date endDate;
 	
-	@Column(name="CURRENT_PERSON")
+	@Transient
 	private Integer currentPerson;
 	
 	@Column(name="PRICE")
