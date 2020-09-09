@@ -9,8 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class Comment {
+public class Comment implements Comparable<Comment>{
 	
 	@Id
 	@GeneratedValue
@@ -22,9 +24,12 @@ public class Comment {
 	private Date date;
 	@Column(name="USER_ID")
 	private Long userId;
+	@Column(name="USERNAME")
+	private String username;
 	
 	@ManyToOne
 	@JoinColumn(name="TRIP_ID")
+	@JsonIgnore
 	private Trip trip;
 	
 	public Comment() {
@@ -32,15 +37,17 @@ public class Comment {
 		content = "";
 		date = new Date();
 		userId = null;
+		username = "";
 	}
 	
-	public Comment(Long id, String content, Date date, Long userId, Trip trip) {
+	public Comment(Long id, String content, Date date, Long userId, Trip trip, String username) {
 		super();
 		this.id = id;
 		this.content = content;
 		this.date = date;
 		this.userId = userId;
 		this.trip = trip;
+		this.username = username;
 	}
 
 	public Trip getTrip() {
@@ -75,10 +82,17 @@ public class Comment {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-
-	@Override
-	public String toString() {
-		return "Comment [id=" + id + ", content=" + content + ", date=" + date + ", userId=" + userId + ", trip=" + trip
-				+ "]";
+	
+	public String getUsername() {
+		return this.username;
 	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	@Override
+	public int compareTo(Comment c) {
+		return this.getDate().compareTo(c.getDate());
+	}	
 }

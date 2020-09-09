@@ -26,4 +26,9 @@ public class TripInstanceServiceImpl implements ITripInstanceService {
 		return tripInstanceDao.findById(id);
 	}
 
+	@Override
+	public List<TripInstance> getCurrentByTrip(Long tripId) {
+		return tripInstanceDao.findCurrentByTrip(tripId);
+	}
+
 }

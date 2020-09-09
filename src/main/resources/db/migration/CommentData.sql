@@ -1,0 +1,2 @@
+INSERT INTO comment (comment_id, content, date, user_id, username, trip_id) VALUES (1, 'Super voyage je suis très content. BLABLABLABLABLA.', '12/05/2020', 1, 'Jean-Pierre Pernault', 1);
+INSERT INTO comment (comment_id, content, date, user_id, username, trip_id) VALUES (2, 'Nul, très déçu. Très mauvais rapport qualité/prix.', '07/03/2020', 2, 'Idris Elbas', 1);

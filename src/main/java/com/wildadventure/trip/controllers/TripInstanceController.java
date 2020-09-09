@@ -42,7 +42,8 @@ public class TripInstanceController {
 		Trip trip = new Trip();
 		trip.setId(new Long(tripId));
 		
-		List<TripInstance> result =  tripInstanceService.getByTrip(trip);
+		List<TripInstance> result =  tripInstanceService.getCurrentByTrip(new Long(tripId));
+		log.info(result);
 		for(TripInstance tripInstance : result) {
 			Integer nbOfClient = bookingProxy.getNumberOfClientOfTrip(tripInstance.getId().intValue()).getBody();
 			tripInstance.setCurrentPerson(nbOfClient);
