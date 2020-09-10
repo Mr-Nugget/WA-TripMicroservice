@@ -10,4 +10,8 @@ public interface IBookingProxy {
 
 	@GetMapping("/Booking/nbOfClient/{tripId}")
 	public ResponseEntity<Integer> getNumberOfClientOfTrip(@PathVariable int tripId);
+	
+	@GetMapping("/Booking/updateStatus/{id}")
+	public ResponseEntity<Void> updateBookingStatus(@PathVariable int id);
+	
 }

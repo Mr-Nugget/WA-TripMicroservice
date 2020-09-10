@@ -18,6 +18,7 @@ import com.wildadventure.trip.exceptions.TripNotFoundException;
 import com.wildadventure.trip.models.AddCommentRequest;
 import com.wildadventure.trip.models.Comment;
 import com.wildadventure.trip.models.Trip;
+import com.wildadventure.trip.proxies.IBookingProxy;
 import com.wildadventure.trip.services.ICommentService;
 import com.wildadventure.trip.services.ITripService;
 
@@ -32,6 +33,9 @@ public class CommentController {
 	
 	@Autowired
 	ITripService tripService;
+	
+	@Autowired
+	IBookingProxy bookingProxy;
 
 	/**
 	 * Get a list of comment associated to a trip
@@ -64,6 +68,8 @@ public class CommentController {
 			commentAdd.setUsername(comment.getUsername());
 			commentAdd.setTrip(trip.get());
 			Comment newComment = commentService.addComment(commentAdd);
+			// Update the booking associated to close user access to comment
+			bookingProxy.updateBookingStatus(comment.getBookingId().intValue());
 			if(newComment == null) {
 				throw new ErrorAddCommentException();
 			}else {

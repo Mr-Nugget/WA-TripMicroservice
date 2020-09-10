@@ -13,14 +13,16 @@ public class AddCommentRequest {
 	private Long userId;
 	private String username;
 	private Long tripId;
+	private Long bookingId;
 	
-	public AddCommentRequest(String content, Date date, Long userId, String username, Long tripId) {
+	public AddCommentRequest(String content, Date date, Long userId, String username, Long tripId, Long bookingId) {
 		super();
 		this.content = content;
 		this.date = date;
 		this.userId = userId;
 		this.username = username;
 		this.tripId = tripId;
+		this.bookingId = bookingId;
 	}
 
 	public String getContent() {
@@ -63,6 +65,11 @@ public class AddCommentRequest {
 		this.tripId = tripId;
 	}
 
-	
-	
+	public Long getBookingId() {
+		return bookingId;
+	}
+
+	public void setBookingId(Long bookingId) {
+		this.bookingId = bookingId;
+	}	
 }
