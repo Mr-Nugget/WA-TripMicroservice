@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wildadventure.trip.exceptions.CommentEmptyException;
+import com.wildadventure.trip.exceptions.ErrorAddCommentException;
 import com.wildadventure.trip.exceptions.TripNotFoundException;
 import com.wildadventure.trip.models.AddCommentRequest;
 import com.wildadventure.trip.models.Comment;
 import com.wildadventure.trip.models.Trip;
-import com.wildadventure.trip.proxies.IBookingProxy;
 import com.wildadventure.trip.services.ICommentService;
 import com.wildadventure.trip.services.ITripService;
 
@@ -33,9 +33,6 @@ public class CommentController {
 	
 	@Autowired
 	ITripService tripService;
-	
-	@Autowired
-	IBookingProxy bookingProxy;
 
 	/**
 	 * Get a list of comment associated to a trip
@@ -60,21 +57,14 @@ public class CommentController {
 			Optional<Trip> trip = tripService.getById(comment.getTripId());
 			if(!trip.isPresent()) {
 				throw new TripNotFoundException("Trip not found while adding comment");
-			}
-			Comment commentAdd = new Comment();
-			commentAdd.setContent(comment.getContent());
-			commentAdd.setDate(comment.getDate());
-			commentAdd.setUserId(comment.getUserId());
-			commentAdd.setUsername(comment.getUsername());
-			commentAdd.setTrip(trip.get());
-			Comment newComment = commentService.addComment(commentAdd);
-			// Update the booking associated to close user access to comment
-			bookingProxy.updateBookingStatus(comment.getBookingId().intValue());
-			if(newComment == null) {
-				throw new ErrorAddCommentException();
 			}else {
-				return ResponseEntity.ok().build();
-			}
+				Comment newComment = commentService.addComment(comment, trip.get());
+				if(newComment == null) {
+					throw new ErrorAddCommentException();
+				}else {
+					return ResponseEntity.ok().build();
+				}
+			}			
 		}
 	}
 }

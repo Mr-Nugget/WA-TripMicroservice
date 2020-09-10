@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wildadventure.trip.exceptions.TripInstanceNotFoundException;
 import com.wildadventure.trip.models.Trip;
 import com.wildadventure.trip.models.TripInstance;
-import com.wildadventure.trip.proxies.IBookingProxy;
 import com.wildadventure.trip.services.ITripInstanceService;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -26,13 +25,10 @@ public class TripInstanceController {
 	@Autowired
 	ITripInstanceService tripInstanceService;
 	
-	@Autowired
-	IBookingProxy bookingProxy;
-	
 	private static Logger log = Logger.getLogger(TripInstanceController.class);
 	
 	/**
-	 * Get a list of tripInstance (dates and current person of a trip) by trip id
+	 * Get a list of futur tripInstance (dates and current person of a trip) by trip id
 	 * @param tripId
 	 * @return Json reponse
 	 * @throws TripInstanceNotFoundException
@@ -43,11 +39,6 @@ public class TripInstanceController {
 		trip.setId(new Long(tripId));
 		
 		List<TripInstance> result =  tripInstanceService.getCurrentByTrip(new Long(tripId));
-		log.info(result);
-		for(TripInstance tripInstance : result) {
-			Integer nbOfClient = bookingProxy.getNumberOfClientOfTrip(tripInstance.getId().intValue()).getBody();
-			tripInstance.setCurrentPerson(nbOfClient);
-		}
 		log.info(result);
 		if(result != null) {
 			return ResponseEntity.ok(result);			

@@ -1,4 +1,4 @@
-package com.wildadventure.trip.controllers;
+package com.wildadventure.trip.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
