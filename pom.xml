@@ -105,11 +105,6 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.8.0</version>
 		</dependency>
-		<dependency>
-			<groupId>com.wildadventure</groupId>
-			<artifactId>common-utils</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -130,25 +125,18 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- Flyway DB plugin and configuration -->
 			<plugin>
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
 				<configuration>
-					<url>jdbc:postgresql://localhost:5432/wildadventure</url>
 					<user>wildadventure</user>
 					<password>WA2020</password>
+					<url>jdbc:postgresql://localhost:5432/wa_travel
+					</url>
 					<schemas>
-						<schema>public</schema>
+						<schema>wa_travel</schema>
 					</schemas>
 				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.postgresql</groupId>
-						<artifactId>postgresql</artifactId>
-						<version>42.2.13</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
