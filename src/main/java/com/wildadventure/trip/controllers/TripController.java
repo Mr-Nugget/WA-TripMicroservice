@@ -21,7 +21,6 @@ import com.wildadventure.trip.models.Category;
 import com.wildadventure.trip.models.Trip;
 import com.wildadventure.trip.services.ITripService;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping("/Trip")
 public class TripController {
