@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "de4c7726-3de0-4a7c-b7f2-bfc9ba6e0a87",
+		"name": "Trip",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9090/Comment/add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookingId\": 4,\r\n    \"content\": \"Bonjour\",\r\n    \"date\": \"2020-09-09\",\r\n    \"userId\": 1,\r\n    \"tripId\": 1,\r\n    \"username\": \"Titouan Raimbault\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/Comment/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"Comment",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9090/Dates/byTrip/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"paid\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/Dates/byTrip/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"Dates",
+						"byTrip",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9090/Trip/byId/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"paid\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/Trip/byId/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"Trip",
+						"byId",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/Trip/all",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"label\": \"La diagonale du fou\",\n\t\"description\": \"Parcourez plus de 500km en 10 jours dans des conditions extrêmes !\",\n\t\"destination\": \"Indonésie\",\n\t\"imagePath\": \"/folder/img/null.png\",\n\t\"category\":{\n\t\t\"id\": 1\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/Trip/all",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"Trip",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/Trip/byCategory/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"label\": \"La diagonale du fou\",\n\t\"description\": \"Parcourez plus de 500km en 10 jours dans des conditions extrêmes !\",\n\t\"destination\": \"Indonésie\",\n\t\"imagePath\": \"/folder/img/null.png\",\n\t\"category\":{\n\t\t\"id\": 1\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/Trip/byCategory/1",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"Trip",
+						"byCategory",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9090/Category/add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\" : 151,\n\t\"label\": \"Convivial\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/Category/add",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"Category",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
